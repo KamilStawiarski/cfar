@@ -5,7 +5,7 @@ close all
 pkg load parallel
 
 objectIndexes=[400]; % wektor obiektow
-objectSNR=[6]; % wektor SNR im odpowiadajacych [dB]
+objectSNR=[12]; % wektor SNR im odpowiadajacych [dB]
 datalength=2048; % dlugosc danych
 CFAR_GUARD_CELLS=4;
 CFAR_TRAINING_CELLS=16;
@@ -14,7 +14,7 @@ CFAR_THRES=[0:0.2:30]; % wektor progow detekcji
 Pd=zeros(1,length(CFAR_THRES));
 Pf=zeros(1,length(CFAR_THRES));
 
-loopsNo=1e2;
+loopsNo=1e3;
 
 threadLambda=@(x)threadFunction(datalength,objectIndexes,objectSNR,CFAR_THRES,CFAR_TRAINING_CELLS,CFAR_GUARD_CELLS); % lambda dla wielowatkowosci
 jobsParallel=100*nproc; % jaka liczba symulacji zostanie wykonana w przeciagu jednej petli (nproc - liczba rdzeni cpu)

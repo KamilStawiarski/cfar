@@ -28,6 +28,9 @@ for loopIdx=1:loopsNo
         semilogy(CFAR_THRES,Pd)
         hold on
         semilogy(CFAR_THRES,Pf,'r')
+        xlabel("T");
+        ylabel("Pd/Pfa")
+        title([num2str(loopIdx) ' symulacji'])
         hold off
         drawnow
     end
