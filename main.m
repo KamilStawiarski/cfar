@@ -24,13 +24,14 @@ for loopIdx=1:loopsNo
         % dziwny zapis powyzej powoduje ze wraz z kolejnymi iteracjami wynik jest coraz dokladniejszy
     end
 
-    if mod(loopIdx,100)==0
+    if mod(loopIdx,10)==0
         semilogy(CFAR_THRES,Pd)
         hold on
         semilogy(CFAR_THRES,Pf,'r')
         xlabel("T");
         ylabel("Pd/Pfa")
         title([num2str(loopIdx) ' symulacji'])
+        grid on
         hold off
         drawnow
     end

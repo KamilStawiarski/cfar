@@ -14,10 +14,10 @@ CFAR_THRES=[0:0.2:30]; % wektor progow detekcji
 Pd=zeros(1,length(CFAR_THRES));
 Pf=zeros(1,length(CFAR_THRES));
 
-loopsNo=1e3;
+loopsNo=100;
 
 threadLambda=@(x)threadFunction(datalength,objectIndexes,objectSNR,CFAR_THRES,CFAR_TRAINING_CELLS,CFAR_GUARD_CELLS); % lambda dla wielowatkowosci
-jobsParallel=100*nproc; % jaka liczba symulacji zostanie wykonana w przeciagu jednej petli (nproc - liczba rdzeni cpu)
+jobsParallel=10*nproc; % jaka liczba symulacji zostanie wykonana w przeciagu jednej petli (nproc - liczba rdzeni cpu)
 
 for loopIdx=1:loopsNo
     [threadPd, threadPf]=pararrayfun(nproc, threadLambda,[1:jobsParallel]',"UniformOutput", false); % przetwarzanie rownolegle
@@ -29,9 +29,11 @@ for loopIdx=1:loopsNo
         semilogy(CFAR_THRES,Pd)
         hold on
         semilogy(CFAR_THRES,Pf,'r')
+%        loglog(Pf,Pd,'r')
         xlabel("T");
         ylabel("Pd/Pfa")
         title([num2str(loopIdx*jobsParallel) ' symulacji'])
+        grid on
         hold off
         drawnow
     end

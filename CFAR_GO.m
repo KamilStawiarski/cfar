@@ -10,7 +10,7 @@ function detected=CFAR_GO(_inputData,_Thres,_cfarTC,_cfarGC)
     CFARLR=zeros(1,datalength+_cfarGC+_cfarTC+_cfarGC+1); % wektor otoczenia lewo i prawostronnego
     CFARLR(1)=sum(_extendedInputData(1:_cfarTC)); % poczatkowa suma
     for cellIdx=2:length(CFARLR)
-        CFARLR(cellIdx)=CFARLR(cellIdx)-_extendedInputData(cellIdx-1)+_extendedInputData(cellIdx+_cfarTC-1); % przesuwne okno
+        CFARLR(cellIdx)=CFARLR(cellIdx-1)-_extendedInputData(cellIdx-1)+_extendedInputData(cellIdx+_cfarTC-1); % przesuwne okno
     end
     CFARLR=CFARLR/_cfarTC; % srednia
     CFARLR=max(CFARLR(1:datalength),CFARLR(_cfarGC+_cfarTC+_cfarGC+2:datalength+_cfarGC+_cfarTC+_cfarGC+1)); % wieksze z
